@@ -1,0 +1,8 @@
+/*
+    These rules take effect when the browser's width is either 768px or les
+*/
+
+@media screen and (max-width: 768px) {
+    background-color: yellow;
+    
+}
