@@ -26,6 +26,10 @@ p {
   margin-bottom: 20px;
 }
 
+.social {
+  width: 25px;
+  height: 25px;
+}
 p:last-child {
   margin-bottom: 0;
 }
@@ -216,17 +220,17 @@ input[type=submit] {
   border: 0 none;
 }
 
-@media screen (max-width: 960px)
+@media only screen and (max-width: 960px)
 {
   /* I'm having trouble with this part and am a little stuck */
 }
 
-@media sreen (max-width: 768px)
+@media only screen and (max-width: 768px)
 {
-
+  #logo {background-color: pink;}
 }
 
-@media screen (max-width: 640px)
+@media only screen and (max-width: 640px)
 {
   
 }
