@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>GIPHY API</title>
+
+        <!-- Added a link to Bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        
+        <!-- This links to the jQuery Library -->
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    	
+    </head>
+<body>
+    <body background="https://opinionstage-res.cloudinary.com/image/upload/c_lfill,dpr_1.0,f_auto,fl_lossy,q_auto:good,w_800/v1/polls/m4erya6xyx7p2iklluqx">
+    <h4 class="text-center" style="color:blue" id="jumbotron">
+        <p>Please click on a button to display 10 giphs and their rating, or add your own button with any search term you choose.</p>
+        <p>If there are less than 10 results for it, I will let you know.  Click on the picture to start/stop the animation.  Have fun!</p>
+    </h4>
+    <div id="button-items"></div>
+    <form>
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="hatType" placeholder="Pick a Hat...">
+            </div>
+            <input id="add-Hat" type="submit" class="btn btn-success" value="Hold onto your Hat...">
+            <span id="entry" style="color: white; background: red"></span>
+        </div>
+    </form>
+
+    <div id="ratings"></div>
+
+    <script>
+    var differentHats = ["Bowler", "Top Hat", "Baseball Hat", "Fedora", "Skull Cap", "Beret", "Bandana", "Floppy Hat", "Stocking Cap", "Stovepipe", "Cowboy Hat"];
+    var hatImage = "";
+
+    function showButtons() {
+        $("#button-items").empty();
+        $("#hatType").val("");
+        
+        for (i=0; i < differentHats.length; i++) {
+            var buttonAdd = $("<button class='btn btn-primary'>");
+            buttonAdd.addClass("hat");
+            buttonAdd.attr("hat-name", differentHats[i]);
+            buttonAdd.text(differentHats[i])
+            $("#button-items").append(buttonAdd);
+            $("#button-items").append(" ");
+        }
+    }
+    showButtons();
+
+    $("#add-Hat").on("click", function(event) {
+    $("#entry").empty();
+    event.preventDefault();
+    var hatInput = $("#hatType").val().trim();
+    var hatTerm = $(this).attr("hat-name");
+    // Test area to make sure the user's button has at least 10 giphs for it.
+    // If there aren't 10, an error message will be shown and no button will be created.
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hatInput + "&limit=2&api_key=dc6zaTOxFJmzC";
+        $.ajax({ url: queryURL, method: "GET"}).done(function(response) {
+        if (response.pagination.total_count >= 10) {
+            differentHats.push(hatType);
+            showButtons(); }
+        else if (response.pagination.total_count === 0) {
+            $("#entry").html(" Sorry, there were no results for this.  Please try again."); }
+        else if (response.pagination.total_count === 1) { $("#entry").html(" Sorry, there was only 1 result for this.  Please try again."); }
+        else { $("#entry").html(" Sorry, there were only " + response.pagination.total_count + " results for this.  Please try again."); }
+        $("#hatType").val("");
+        });
+});
+$(document).on("click", ".hat", display);
+function display() {
+    // This is just to clear out any error message (if there is one)
+    $("#entry").empty();
+    var hatTerm = $(this).attr("hat-name");
+
+    console.log(hatTerm)
+
+    // The GIPHY query.  This limits to 10 results
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hatTerm + "&limit=10&api_key=dc6zaTOxFJmzC";
+    $.ajax({ url: queryURL, method: "GET"}).done(function(response) {
+        // This runs 10 times (limit is 10 in query) to show all the GIPHY pictures from the website's response.
+        for (var j = 0; j < response.data.length; j++) {
+            
+            // Gets the animated gif URL
+            var active = response.data[j].images.fixed_width.url;
+            // Gets the still gif URL
+            var still = response.data[j].images.fixed_width_still.url;
+            var rating = "Rating: " + (response.data[j].rating).toUpperCase();
+            // Creates the new img item
+            var hatImage = $("<img>");
+            
+            // This changes the text color of ratings to green so it can be seen against the space background image.
+            $("#ratings").css("color", "green");
+            // This creates a new div for the rating so that it maintains the gifs size
+            var ratingDiv = $("<div id='ratingDiv'>" + rating + "</div>");
+            $(ratingDiv).css({"text-align":"center", "font-size":"20px", "width":"200", "display":"block"});
+            hatImage.attr({"active":active, "still":still, "src":still, "state":"still"});
+            // This holds the new div for both rating and the image. Every image will have a rating on top of it.
+            var ratingAndImage = $("<div>");
+            $(ratingAndImage).css({"float":"left"});
+            $(ratingAndImage).prepend(ratingDiv, hatImage);
+            // This adds the rating and image to the page.
+            $("#ratings").prepend(ratingAndImage);
+            // When the user clicks on a picture, this will either start or stop the animation of that picture.
+            $(hatImage).on("click", function(event) {
+                // This is just to clear out any error message (if there is one)
+                $("#entry").empty();
+                
+                var state = $(this).attr("state");
+                var source = $(this).attr("src");
+                if (state === "still") {
+                $(this).attr("src", $(this).attr("active"));
+                $(this).attr("state", "active"); }
+                else {
+                $(this).attr("src", $(this).attr("still"));
+                $(this).attr("state", "still"); } 
+            });
+        }
+   });
+}
+</script>
+</body>
+</html>
+
+
