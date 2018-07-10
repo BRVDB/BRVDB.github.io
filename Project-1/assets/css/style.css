@@ -1,0 +1,62 @@
+body {
+    background-image: url("../images/background.jpg");
+    background-repeat: repeat;
+    background-size: 100%;
+    height: 960px;
+    color: white;
+}
+
+#input {
+    margin-top: 8%;
+    margin-left: 10%;
+}
+
+.activities {
+    line-height: 20px;
+    color: white;
+}
+
+.searchTextField {
+    color: black;
+}
+
+
+/* #roundtripDateWrap {
+    color: white;
+
+} */
+
+.form-check {
+    font-weight: bold;
+    color: white;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+    /* background-image: url(../img/jumbotronbackground.jpg); */
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgb(32, 100, 36);
+    /* text-shadow: black 0.3em 0.3em 0.3em; */
+}
+
+.weather-card {
+    margin: 60px auto;
+    height: 740px;
+    width: 450px;
+    background: #fff;
+    box-shadow: 0 1px 38px rgba(0, 0, 0, 0.15), 0 5px 12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+
+.joePlaceHolder {
+    float: left;
+    height: 300px;
+    width: 300px;
+    margin: 10px;
+    border: 1px solid black;
+    background-color: white;
+    opacity: 0.8;
+    padding: 5px;
+}
