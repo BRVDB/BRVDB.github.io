@@ -1,0 +1,62 @@
+body {
+  padding-top: 54px;
+  background: url("assets/oldpaper2.jpg");
+  background-repeat: repeat;
+  background-size: 100%;
+  opacity: 50%;
+  color: black;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+
+#navbar {
+    background-color: rgb(124, 67, 13);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 18px;
+    color: white;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+.img-fluid {
+    height: 285px;
+    width: 285px;
+}
+
+.card-img-top {
+    height: 250px;
+    width: 285px;
+    align: center;
+    padding: 10px;
+}
+
+.body-text {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* .card {
+    height: 300px;
+} */
+
+/* .card-img-top {
+    height: 33%;
+    width: 100%px;
+    align-items: center;
+} */
+
+.top-buffer {
+    margin-top: 20px;
+}
+
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
