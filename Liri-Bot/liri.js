@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-// fs is a core Node package for reading and writing files
+// fs - core node package
 var fs = require("fs");
 
 //request npm package
@@ -41,7 +41,7 @@ var movieName = "";
 
 // Look at the initial CLI parameter and execute code based on that parameter
 if (cmd === "my-tweets") {
-// This will show your last 20 tweets and when they were created in your terminal/bash window.
+// This will show your last 10 tweets and when they were created in your terminal/bash window.
 getTweets();
 
 } else if (cmd === "spotify-this-song") {
@@ -49,7 +49,7 @@ getTweets();
 	if (option1) {
         getSpotify(option1); //Run the function (below) with the song name
     } else {
-        getSpotify("Interpol"); //Otherwise run the default song
+		getSpotify("Interpol"); //Default Song
     }
 
 } else if (cmd === "movie-this") {

@@ -4,6 +4,7 @@
   "description": "",
   "main": "config.js",
   "dependencies": {
+    "cli": "^1.0.1",
     "twitter": "^1.7.1"
   },
   "devDependencies": {},
